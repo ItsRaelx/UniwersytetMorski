@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #leftbox {
+                float: left;
+                background: lightblue;
+                width: 25%;
+                height: 800px;  
+            }
+    
+            #middlebox {
+                float: left;
+                background: lightyellow;
+                width: 50%;
+                height: 800px;
+            }
+    
+            #rightbox {
+                float: right;
+                background: lightblue;
+                width: 25%;
+                height: 800px;
+            }
+
+            #block {
+                margin: 0;
+                background: lightgreen;
+                text-align: center;
+            }
+
+            h1 {
+                margin: 0;
+            }
+
+            #center {
+                margin-top: 50px;
+                text-align: center;
+            }
+
+            #main {
+                margin: 20px;
+            }
+
+            #limit {
+                width: 1400px;
+            }
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            table {
+                margin-top: 10px;
+                margin-left: 10px;
+                margin-bottom:10px;
+                border-spacing: 0px 0px; /* [odegłość wzajemna kolumn] [odegłość wzajemna wierszy] */
+                border: 1px solid black;  /* obramowanie zewnętrzne tabeli */
+            }
+            td.naglowek {
+                text-align: center;
+                padding: 2px;
+                color: #ffffff;
+                background-color: rgb(15, 45, 99);
+                border: 1px solid white;
+                border-bottom: 0px solid;
+                padding: 5px;
+            }
+            caption {
+                color: #ffffff;
+                background-color: rgb(15, 45, 99);
+                padding: 5px;
+            }
+            td {
+                text-align: center;
+                background-color: rgb(255, 255, 255);
+                border: 1px solid rgb(15, 45, 99);
+                color: rgb(15, 45, 99);
+                padding: 5px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="limit">
+            <div id="block">
+                <h1>Strona główna</h1>
+            </div>
+
+            <div id="leftbox">
+                <ul>
+                    <li>opcja 1</li>
+                    <li>opcja 2</li>
+                    <li>opcja 3</li>
+                    <li>opcja 4</li>
+                </ul>
+            </div>
+            
+            <div id="middlebox">
+                <p id="main">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p id="main">
+                    Wprowadź imię <input type="text" name="imie"><br>
+                    Wprowadź wiek <input type="text" name="wiek"><br>
+                    Wybierz płeć kobieta<input type="radio" id="k" name="selector" value="kobieta">, mężczyzna<input type="radio" id="m" name="selector" value="mężczyzna"><br>
+                    Wybierz miasto <select name="miasto" id="miasto">
+                        <option value="gdynia">Gdynia</option>
+                        <option value="gdansk">Gdańsk</option>
+                    </select><br>
+                    <button>wyślij</button>
+                </p>
+                <p>
+                    <center>
+                        <table>
+
+                            <caption><!---------------------------------------- tytuł tabeli -->
+                                <strong>tabela rozmiarów męskich</strong>
+                            </caption>
+                
+                            <thead><!------------------------------------------ nagłówek tabeli -->
+                                <tr>
+                                    <td class="naglowek"><strong>wzrost<br>[A]</strong></td>
+                                    <td class="naglowek"><strong>obwód klatki piersiowej<br>[B]</strong></td>
+                                    <td class="naglowek"><strong>obwód pasa<br>[c]</strong></td>
+                                    <td class="naglowek"><strong>rozmiar odzieży</strong></td>
+                                </tr>
+                            </thead>
+                
+                            <tbody><!----------------------------------------- wnętrze tabeli "ciało tabeli" -->
+                                <tr>
+                                    <td>158-164</td>
+                                    <td>80-84</td>
+                                    <td>72-76</td>
+                                    <td><strong>42</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>158-164</td>
+                                    <td>84-88</td>
+                                    <td>76-80</td>
+                                    <td><strong>44</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>164-170</td>
+                                    <td>88-92</td>
+                                    <td>80-84</td>
+                                    <td><strong>46</strong></td>
+                                </tr>
+                            </tbody>         
+                        
+                        </table>
+                    </center>
+                </p>
+                <p>
+                    <center>
+                        <img src="./obrazek.png" alt="" height="350px">
+                    </center>
+                </p>
+            </div>
+
+            <div id="rightbox">
+                <p id="center">
+                    <a href="https://wp.pl/">podstrona</a>
+                </p>
+            </div>
+
+            <div id="block">
+                <h3>stopka WWW</h3>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #main {
+            float: left;
+            width: 799px;
+            height: 500px;
+            border-right: 1px solid black;
+            text-align: center;
+        }
+
+        #leftmenu {
+            float: left;
+            width: 200px;
+            height: 500px;
+            margin-left: 451px;
+        }
+
+        div.content {
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        header {
+            width: 1000px;
+            height: 70px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            padding: 10px;
+        }
+
+        .link {
+            display: flex;
+            padding: 5px;
+            margin: 10px;
+        }
+
+        .link:hover {
+            padding: 5px;
+            background-color: aquamarine;
+        }
+
+        #menu {
+            background-color:white;
+            border: 1px solid black;
+            border-top: 0px;
+            width: 1000px;
+            margin-left: 451px;
+            display: flex;
+        }
+
+        #first:hover + .hide {
+            display: block;
+        }
+
+        .hide:hover {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+            position: absolute;
+            top: 120px;
+            width: 100; 
+            background-color: rgb(177, 175, 175);
+        }
+
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <center>
+        <header>
+            <h1>
+                Strona Główna
+            </h1>
+        </header>
+    </center>
+    <div id="menu">
+        <div id="first">
+            <p >menu</p>
+        </div>
+        <div class="hide">
+            <div class="link">
+                <p>Strona Główna</p>
+            </div>
+            <div class="link">
+                <a href="./podstrona1.html">Podstrona1</a>
+            </div>
+            <div class="link">
+                <a href="./podstrona2.html">Podstrona2</a>
+            </div>
+        </div>
+    </div>
+    <!-- <nav id="menu" class="link">
+        <div class="link">
+            <p>Strona Główna</p>
+        </div>
+        <div class="link">
+            <a href="./podstrona1.html">Podstrona1</a>
+        </div>
+        <div class="link">
+            <a href="./podstrona2.html">Podstrona2</a>
+        </div>
+    </nav> -->
+        <div class="content" id="leftmenu">
+            <p></p>
+        </div>
+        <div class="content" id="main">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+    </center>
+</body>
+</html>
