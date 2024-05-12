@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+#comparisonForm {
+    display: flex;
+    align-items: center;
+}
+#result {
+    margin-left: 20px;
+}
