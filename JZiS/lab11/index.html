@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Formularz</h2>
+        <form id="myForm">
+            <div class="form-group">
+                <label for="username">Nazwa użytkownika</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Hasło</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label>Zgody</label>
+                <ul>
+                    <li>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="option1"> Subskrypcja newslettera
+                        </label>
+                    </li>
+                    <li>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="option2"> Akceptacja regulaminu
+                        </label>
+                    </li>
+                    <li>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="option3"> Przetwarzanie danych osobowych
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label>Podaj swoją płeć</label>
+                <ul>
+                    <li>
+                        <label class="radio-label">
+                            <input type="radio" name="choice" value="kobieta"> Kobieta
+                        </label>
+                    </li>
+                    <li>
+                        <label class="radio-label">
+                            <input type="radio" name="choice" value="mężczyzna"> Mężczyzna
+                        </label>
+                    </li>
+                    <li>
+                        <label class="radio-label">
+                            <input type="radio" name="choice" value="nie podano"> Wole nie podawać
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <button type="submit">Wyślij</button>
+                <button type="button" id="resetButton">Wyczyść</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
