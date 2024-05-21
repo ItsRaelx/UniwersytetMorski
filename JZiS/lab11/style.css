@@ -7,6 +7,7 @@ body {
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
 }
+
 .form-container {
     background: white;
     padding: 2rem;
@@ -14,18 +15,22 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;
 }
+
 .form-container h2 {
     margin-bottom: 1rem;
     color: #333;
 }
+
 .form-group {
     margin-bottom: 1rem;
 }
+
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     color: #333;
 }
+
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="password"] {
@@ -35,15 +40,17 @@ body {
     border-radius: 8px;
     box-sizing: border-box;
 }
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+
+.form-group table {
+    width: 100%;
     margin-bottom: 1rem;
+    border-collapse: collapse;
 }
-ul li {
-    margin-bottom: 0.5rem;
+
+.form-group table td {
+    padding: 0.5rem 0;
 }
+
 .form-group button[type="submit"],
 .form-group button[type="button"] {
     display: block;
@@ -56,6 +63,7 @@ ul li {
     cursor: pointer;
     margin-top: 1rem;
 }
+
 .form-group button[type="submit"]:hover,
 .form-group button[type="button"]:hover {
     background-color: #555;
