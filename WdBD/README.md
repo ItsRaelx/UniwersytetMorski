@@ -1,6 +1,6 @@
-# Notatka dotycząca podstaw SQL na podstawie powyższych przykładów
+# Notatka dotycząca podstaw SQL
 
-SQL (Structured Query Language) jest językiem używanym do zarządzania i manipulowania bazami danych. Poniższe przykłady i wyjaśnienia obejmują różne aspekty SQL, które pozwalają na tworzenie, modyfikowanie i usuwanie tabel, wstawianie danych, wykonywanie kwerend, łączenie tabel, wykonywanie obliczeń oraz używanie funkcji.
+SQL (Structured Query Language) jest językiem używanym do zarządzania i manipulowania bazami danych. Poniżej znajduje się szczegółowy przegląd podstawowych zagadnień SQL, takich jak tworzenie i modyfikowanie tabel, wstawianie i usuwanie danych, wykonywanie kwerend, łączenie tabel, obliczenia, widoki, funkcje użytkownika, grupowanie danych oraz typy danych.
 
 ## Tworzenie tabel
 
@@ -20,6 +20,17 @@ CREATE TABLE osoby (
 - `nazwisko VARCHAR(50) NOT NULL` - kolumna `nazwisko` typu tekstowego (maksymalnie 50 znaków), która nie może być pusta.
 - `imie VARCHAR(50) NOT NULL` - kolumna `imie` typu tekstowego (maksymalnie 50 znaków), która nie może być pusta.
 - `wiek INT` - kolumna `wiek` typu całkowitego.
+
+### Typy danych w SQL
+
+- `INT` - liczba całkowita.
+- `SERIAL` - liczba całkowita autoinkrementowana.
+- `VARCHAR(n)` - ciąg znaków o zmiennej długości, maksymalnie `n` znaków.
+- `TEXT` - długi ciąg znaków.
+- `DATE` - data (rok, miesiąc, dzień).
+- `FLOAT` - liczba zmiennoprzecinkowa.
+- `NUMERIC` - liczba o stałej precyzji.
+- `BOOLEAN` - wartość logiczna (TRUE lub FALSE).
 
 ### Wyświetlanie zawartości tabeli
 
@@ -168,17 +179,27 @@ SELECT nazwisko, ROUND((netto * 1.23)::NUMERIC, 2) AS "brutto" FROM osoby;
 
 ### Widoki
 
+Widoki w SQL to zapisane zapytania, które można traktować jak tabele. Są one przydatne do skomplikowanych zapytań, które często się powtarzają.
+
+#### Tworzenie widoku
+
 ```sql
 CREATE VIEW widok1 AS
 SELECT osoby.nazwisko, wiek, miasto
 FROM osoby
-INNER JOIN miasta ON osoby.nazwisko = miasto.nazwisko;
+INNER JOIN miasta ON osoby.nazwisko = miasta.nazwisko;
+```
 
+- `CREATE VIEW` - tworzenie widoku.
+- `AS` - definiowanie zapytania, które tworzy widok.
+
+#### Używanie widoku
+
+```sql
 SELECT * FROM widok1;
 ```
 
-- `CREATE VIEW` - tworzenie widoku, który jest zapisanym zapytaniem.
-- `SELECT * FROM widok1` - używanie widoku jak tabeli.
+- `SELECT * FROM widok1` - wybieranie danych z widoku.
 
 ### Operacje na dacie
 
@@ -219,6 +240,8 @@ SELECT SUM(netto) AS "suma" FROM osoby;
 
 ## Bloki kodu (DO)
 
+Bloki kodu `DO` pozwalają na wykonywanie bardziej skomplikowanych operacji, takich jak używanie zmiennych, wywoływanie funkcji i operacje warunkowe.
+
 ```sql
 DO $$ 
 DECLARE 
@@ -227,18 +250,19 @@ BEGIN
     SELECT COUNT(*) 
     INTO ile
     FROM osoby;
-    RAISE NOTICE 'ilość rekordów: %', ile;
+    RAISE NOTICE 'ilość rekord
+
+ów: %', ile;
 END $$;
 ```
 
-- `DO $$ ... $$` - anonimowy blok kodu.
+- `DO $$` - początek bloku kodu.
 - `DECLARE` - deklaracja zmiennych.
 - `BEGIN ... END` - blok kodu do wykonania.
-- `RAISE NOTICE` - wyświetlanie komunikatów.
+- `SELECT ... INTO` - przypisanie wartości do zmiennej.
+- `RAISE NOTICE` - wyświetlenie komunikatu.
 
 ## Grupowanie danych
-
-### Przykład grupowania
 
 ```sql
 SELECT COUNT(*) AS "ilość mieszkańców", miasto 
@@ -251,29 +275,42 @@ INNER JOIN osoby ON miasta.nazwisko = osoby.nazwisko
 GROUP BY miasto;
 ```
 
-- `GROUP BY` - grupowanie danych według kolumn.
-- `HAVING` - warunki na grupach danych.
+- `GROUP BY` - grupowanie wyników według kolumn.
 
 ## Funkcje użytkownika
 
-### Przykład funkcji
+Funkcje użytkownika pozwalają na tworzenie niestandardowych funkcji w SQL, które mogą wykonywać różnorodne operacje na danych.
+
+### Przykład funkcji aktualizującej tabelę
 
 ```sql
-CREATE OR REPLACE FUNCTION f1() RETURNS INT AS
+CREATE OR REPLACE FUNCTION f1() RETURNS void AS
 $$
-    SELECT COUNT(*) FROM osoby;
+    UPDATE osoby SET nazwisko = 'Kowalski' WHERE user_id = 1;
 $$ LANGUAGE SQL;
 
 SELECT f1();
 ```
 
-- `CREATE OR REPLACE FUNCTION` - tworzenie funkcji.
-- `RETURNS` - typ
-
- zwracanej wartości.
+- `CREATE OR REPLACE FUNCTION` - tworzenie lub zastępowanie funkcji.
+- `RETURNS void` - funkcja nie zwraca wartości.
 - `LANGUAGE SQL` - język implementacji funkcji.
 
-### Funkcja zwracająca rekordy
+### Przykład funkcji zwracającej wartość
+
+```sql
+CREATE OR REPLACE FUNCTION f1(naz TEXT) RETURNS INT AS
+$$
+    SELECT netto FROM osoby WHERE nazwisko = naz;
+$$ LANGUAGE SQL;
+
+SELECT f1('Malinowska');
+```
+
+- `RETURNS INT` - funkcja zwraca wartość typu `INT`.
+- `TEXT` - typ argumentu wejściowego.
+
+### Przykład funkcji zwracającej rekordy
 
 ```sql
 CREATE OR REPLACE FUNCTION f1() RETURNS SETOF osoby AS 
@@ -286,4 +323,127 @@ SELECT * FROM f1();
 
 - `RETURNS SETOF` - funkcja zwraca wiele rekordów.
 
-Powyższe przykłady przedstawiają podstawowe operacje SQL, które można wykonywać na bazach danych. Każdy z tych tematów można zgłębić, aby lepiej zrozumieć i efektywnie używać SQL w codziennej pracy z bazami danych.
+### Przykład funkcji z OUT parametrami
+
+```sql
+CREATE OR REPLACE FUNCTION f1(OUT surname TEXT, OUT age INT, OUT city TEXT)
+RETURNS SETOF RECORD AS 
+$$
+    SELECT osoby.nazwisko, wiek, miasto 
+    FROM osoby 
+    INNER JOIN miasta ON osoby.nazwisko = miasta.nazwisko;
+$$ LANGUAGE SQL;
+
+SELECT * FROM f1();
+```
+
+- `RETURNS SETOF RECORD` - funkcja zwraca rekordy (wynik zapytania).
+
+## Podstawowe operacje SQL
+
+### Tworzenie tabeli
+
+```sql
+CREATE TABLE nazwa_tabeli (
+  kolumna1 TYP,
+  kolumna2 TYP,
+  ...
+);
+```
+
+### Usuwanie tabeli
+
+```sql
+DROP TABLE nazwa_tabeli;
+```
+
+### Wstawianie danych
+
+```sql
+INSERT INTO nazwa_tabeli (kolumna1, kolumna2, ...) VALUES (wartość1, wartość2, ...);
+```
+
+### Aktualizacja danych
+
+```sql
+UPDATE nazwa_tabeli SET kolumna1 = wartość1 WHERE warunek;
+```
+
+### Usuwanie danych
+
+```sql
+DELETE FROM nazwa_tabeli WHERE warunek;
+```
+
+### Selekcja danych
+
+```sql
+SELECT kolumna1, kolumna2, ... FROM nazwa_tabeli WHERE warunek;
+```
+
+### Sortowanie wyników
+
+```sql
+SELECT kolumna1, kolumna2, ... FROM nazwa_tabeli ORDER BY kolumna1 [ASC|DESC];
+```
+
+- `ASC` - sortowanie rosnące (domyślnie).
+- `DESC` - sortowanie malejące.
+
+### Grupowanie wyników
+
+```sql
+SELECT kolumna1, COUNT(*) FROM nazwa_tabeli GROUP BY kolumna1;
+```
+
+### Filtrowanie grup
+
+```sql
+SELECT kolumna1, COUNT(*) FROM nazwa_tabeli GROUP BY kolumna1 HAVING COUNT(*) > 1;
+```
+
+- `HAVING` - warunek filtrowania grup.
+
+### Łączenie tabel
+
+#### INNER JOIN
+
+```sql
+SELECT kolumna1, kolumna2
+FROM tabela1
+INNER JOIN tabela2 ON tabela1.kolumna = tabela2.kolumna;
+```
+
+- `INNER JOIN` - zwraca tylko te rekordy, które mają pasujące wartości w obu tabelach.
+
+#### LEFT JOIN
+
+```sql
+SELECT kolumna1, kolumna2
+FROM tabela1
+LEFT JOIN tabela2 ON tabela1.kolumna = tabela2.kolumna;
+```
+
+- `LEFT JOIN` - zwraca wszystkie rekordy z tabeli lewej oraz pasujące rekordy z tabeli prawej, a tam gdzie brak pasujących wartości, zwraca NULL.
+
+#### RIGHT JOIN
+
+```sql
+SELECT kolumna1, kolumna2
+FROM tabela1
+RIGHT JOIN tabela2 ON tabela1.kolumna = tabela2.kolumna;
+```
+
+- `RIGHT JOIN` - zwraca wszystkie rekordy z tabeli prawej oraz pasujące rekordy z tabeli lewej, a tam gdzie brak pasujących wartości, zwraca NULL.
+
+#### FULL JOIN
+
+```sql
+SELECT kolumna1, kolumna2
+FROM tabela1
+FULL JOIN tabela2 ON tabela1.kolumna = tabela2.kolumna;
+```
+
+- `FULL JOIN` - zwraca wszystkie rekordy, gdzie istnieją pasujące wartości w jednej z tabel lub w obu tabelach.
+
+Powyższa notatka obejmuje podstawowe oraz nieco bardziej zaawansowane operacje SQL, umożliwiając efektywne zarządzanie i manipulowanie danymi w bazach danych.
