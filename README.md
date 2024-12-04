@@ -19,5 +19,3 @@ Jeśli chcesz przyczynić się do rozwoju repozytorium, możesz:
 - Dodać własne materiały, używając pull requestów.
 - Zgłaszać problemy i sugerować ulepszenia poprzez issues.
 - Pomagać w organizacji i kategoryzacji istniejących materiałów.
-
-:)
