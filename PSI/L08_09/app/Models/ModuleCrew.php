@@ -3,27 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ModuleCrew extends Model
 {
-    protected $fillable = ['ship_module_id', 'nick', 'gender', 'age'];
+    public $timestamps = false;
 
-    public static array $rules = [
-        'ship_module_id' => 'required|exists:ship_modules,id',
-        'nick' => 'required|string|min:3|max:10|unique:module_crews',
-        'gender' => 'required|in:F,M,N',
-        'age' => 'required|integer|min:18|max:85'
+    protected $table = 'module_crew';
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'ship_module_id',
+        'nick',
+        'gender',
+        'age'
     ];
 
-    public function module(): BelongsTo
+    public function shipModule()
     {
-        return $this->belongsTo(ShipModule::class, 'ship_module_id');
+        return $this->belongsTo(ShipModules::class, 'ship_module_id');
     }
 
-    public function skills(): HasMany
+    public function crewSkills()
     {
-        return $this->hasMany(CrewSkill::class);
+        return $this->hasMany(CrewSkills::class, 'module_crew_id');
     }
 }
