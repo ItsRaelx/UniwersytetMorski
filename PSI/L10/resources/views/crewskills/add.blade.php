@@ -6,15 +6,10 @@
 <div id="zawartosc">
     <h2>Add Crew Skill</h2>
     <div class="card">
-        <form class="form-inline" action="<?=config('app.url'); ?>/crewskills/save" method="post">
-            @csrf
+        <form onsubmit="CrewSkills.create(event)">
             <div class="form-group">
                 <label for="module_crew_id">Crew Member:</label>
-                <select id="module_crew_id" name="module_crew_id" required>
-                    @foreach($crew as $member)
-                        <option value="{{ $member->id }}">{{ $member->nick }}</option>
-                    @endforeach
-                </select>
+                <select id="module_crew_id" name="module_crew_id" required></select>
             </div>
             <div class="form-group">
                 <label for="name">Skill Name:</label>
@@ -22,17 +17,12 @@
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
-
-        @if ($errors->any())
-            <div class="alert alert-danger mt-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
 </div>
+<script src="<?=config('app.url'); ?>/js/api.js"></script>
+<script src="<?=config('app.url'); ?>/js/crewskills.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => CrewSkills.loadCrewMembers());
+</script>
 </body>
 </html>

@@ -9,30 +9,23 @@
         <div class="mb-4">
             <a href="<?=config('app.url'); ?>/shipmodules/add" class="btn btn-success">Add New Module</a>
         </div>
-        <table>
+        <table id="modules-table">
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Module Name</th>
                 <th>Is Workable</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
-            @foreach($ship_modules as $module)
-                <tr>
-                    <td>{{ $module->id }}</td>
-                    <td>{{ $module->module_name }}</td>
-                    <td>{{ $module->is_workable ? 'Yes' : 'No' }}</td>
-                    <td><a href="<?=config('app.url'); ?>/shipmodules/edit/{{$module->id}}" class="btn btn-primary">Edit</a></td>
-                    <td><a href="<?=config('app.url'); ?>/shipmodules/show/{{$module->id}}" class="btn btn-danger">Del</a></td>
-                    <td><a href="<?=config('app.url'); ?>/shipmodules/crew/{{$module->id}}">{{ $module->module_name }}</a></td>
-                </tr>
-            @endforeach
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
+<script src="<?=config('app.url'); ?>/js/api.js"></script>
+<script src="<?=config('app.url'); ?>/js/shipmodules.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => ShipModules.loadList());
+</script>
 </body>
 </html>

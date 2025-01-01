@@ -6,15 +6,10 @@
 <div id="zawartosc">
     <h2>Add New Crew Member</h2>
     <div class="card">
-        <form class="form-inline" action="<?=config('app.url'); ?>/modulecrew/save" method="post">
-            @csrf
+        <form onsubmit="ModuleCrew.create(event)">
             <div class="form-group">
                 <label for="ship_module_id">Module:</label>
-                <select id="ship_module_id" name="ship_module_id" required>
-                    @foreach($modules as $module)
-                        <option value="{{ $module->id }}">{{ $module->module_name }}</option>
-                    @endforeach
-                </select>
+                <select id="ship_module_id" name="ship_module_id" required></select>
             </div>
             <div class="form-group">
                 <label for="nick">Nick:</label>
@@ -37,17 +32,12 @@
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
-
-        @if ($errors->any())
-            <div class="alert alert-danger mt-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
 </div>
+<script src="<?=config('app.url'); ?>/js/api.js"></script>
+<script src="<?=config('app.url'); ?>/js/modulecrew.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => ModuleCrew.loadModules());
+</script>
 </body>
 </html>

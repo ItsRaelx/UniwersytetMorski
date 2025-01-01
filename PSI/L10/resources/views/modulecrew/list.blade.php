@@ -9,7 +9,7 @@
         <div class="mb-4">
             <a href="<?=config('app.url'); ?>/modulecrew/add" class="btn btn-success">Add New Crew Member</a>
         </div>
-        <table>
+        <table id="crew-table">
             <thead>
             <tr>
                 <th>ID</th>
@@ -17,25 +17,17 @@
                 <th>Nick</th>
                 <th>Gender</th>
                 <th>Age</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
-            @foreach($crew as $member)
-                <tr>
-                    <td>{{ $member->id }}</td>
-                    <td>{{ $member->shipModule->module_name }}</td>
-                    <td>{{ $member->nick }}</td>
-                    <td>{{ $member->gender }}</td>
-                    <td>{{ $member->age }}</td>
-                    <td><a href="<?=config('app.url'); ?>/modulecrew/edit/{{$member->id}}" class="btn btn-primary">Edit</a></td>
-                    <td><a href="<?=config('app.url'); ?>/modulecrew/show/{{$member->id}}" class="btn btn-danger">Del</a></td>
-                </tr>
-            @endforeach
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
+<script src="<?=config('app.url'); ?>/js/api.js"></script>
+<script src="<?=config('app.url'); ?>/js/modulecrew.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => ModuleCrew.loadList());
+</script>
 </body>
 </html>

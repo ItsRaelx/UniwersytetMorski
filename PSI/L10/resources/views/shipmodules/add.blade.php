@@ -4,36 +4,27 @@
 <body>
 @include('partials.navi')
 <div id="zawartosc">
-    <h2>Add ship module</h2>
+    <h2>Add Ship Module</h2>
     <div class="card">
-        <form class="form-inline" action="<?=config('app.url'); ?>/shipmodules/save" method="post">
-            @csrf
+        <form onsubmit="ShipModules.create(event)">
             <div class="form-group">
                 <label for="module_name">Module Name:</label>
-                <input id="module_name" name="module_name" size="25" required>
+                <input id="module_name" name="module_name" required minlength="3" maxlength="25">
             </div>
             <div class="form-group">
                 <label>Is Workable:</label>
                 <div>
-                    <input type="radio" name="is_workable" id="workable_yes" value="1" checked required>
-                    <label for="workable_yes">True</label>
-                    <input type="radio" name="is_workable" id="workable_no" value="0" required>
-                    <label for="workable_no">False</label>
+                    <input type="radio" name="is_workable" value="1" checked required>
+                    <label>Yes</label>
+                    <input type="radio" name="is_workable" value="0">
+                    <label>No</label>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
-
-        @if ($errors->any())
-            <div class="alert alert-danger mt-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     </div>
 </div>
+<script src="<?=config('app.url'); ?>/js/api.js"></script>
+<script src="<?=config('app.url'); ?>/js/shipmodules.js"></script>
 </body>
 </html>
